@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/register.html   11 Nov 2019 12:22:27 GMT -->
+{% include 'head.html' %}
+<body class="page-template belle">
+<div class="pageWrapper">
+	{% include 'adminheader.html' %}
+    <br><br><br>
+    <!--Body Content-->
+    <div id="page-content">
+    	<!--Page Title-->
+    	<div class="page section-header text-center">
+			<div class="page-title">
+        		<div class="wrapper"><h1 class="page-width">Create an Event</h1></div>
+      		</div>
+		</div>
+        <!--End Page Title-->
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger {% else %}{{ message.tags }}{% endif %} alert-dismissible fade show my-0" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+         {% endfor %}
+        <div class="container">
+        	<div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+                	<div class="mb-4">
+                       <form method="post" action="{% url 'CreateEvent' %}" id="CustomerLoginForm" accept-charset="UTF-8" enctype="multipart/form-data" class="contact-form">
+                           {% csrf_token %}
+                          <div class="row">
+	                          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="EventName">Event Name</label>
+                                    <input type="text" name="event_name" placeholder="" id="EventName" autofocus="">
+                                </div>
+                               </div>
+                               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="EventPlace">Event Place</label>
+                                    <input type="text" name="event_place" placeholder="" id="EventPlace">
+                                </div>
+                               </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="EventDate">Date</label>
+                                    <input type="datetime-local" name="date" placeholder="" id="EventDate" class="">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="Price">Ticket Price</label>
+                                    <input type="text" name="price" placeholder="" id="Price" class="">
+                                </div>
+                            </div>
+                              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="Tickets">Total Tickets</label>
+                                    <input type="text" name="total_tickets" placeholder="" id="Tickets" class="">
+                                </div>
+                            </div>
+                              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="EventDescription">Event Description</label>
+                                    <textarea name="description" id="EventDescription" rows="3"></textarea>
+                                </div>
+                            </div>
+                              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="EventImage">Event Image</label>
+                                    <input type="file" name="image" placeholder="" id="EventImage" class="">
+                                </div>
+                            </div>
+                           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="EventPoster">Event Poster</label>
+                                    <input type="file" name="poster" placeholder="" id="EventPoster" class="">
+                                </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+                                <input type="submit" class="btn mb-3" value="Create">
+                            </div>
+                         </div>
+                     </form>
+                    </div>
+               	</div>
+            </div>
+        </div>
+
+    </div>
+    <!--End Body Content-->
+
+    <!--Footer-->
+   {% include 'footer.html' %}
+    <!--End Footer-->
+    {% include 'jsinclude.html' %}
+</div>
+</body>
+
+<!-- belle/register.html   11 Nov 2019 12:22:27 GMT -->
+</html>

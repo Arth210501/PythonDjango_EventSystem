@@ -1,0 +1,136 @@
+{% load cart %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/cart-variant1.html   11 Nov 2019 12:44:31 GMT -->
+{% include 'head.html' %}
+<body class="page-template belle cart-variant1">
+<div class="pageWrapper">
+	{% include 'header.html' %}
+    <br><br><br>
+    <!--Body Content-->
+    <div id="page-content">
+    	<!--Page Title-->
+    	<div class="page section-header text-center">
+			<div class="page-title">
+        		<div class="wrapper"><h1 class="page-width">Shopping Cart</h1></div>
+      		</div>
+		</div>
+        <!--End Page Title-->
+
+        <div class="container">
+        	<div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+{#                	<div class="alert alert-success text-uppercase" role="alert">#}
+{#						<i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!#}
+{#					</div>#}
+                		<table>
+                            <thead class="cart__row cart__header">
+                                <tr>
+                                    <th colspan="2" class="text-center">Event</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Tickets</th>
+                                    <th class="text-right">Total</th>
+                                    <th class="action">&nbsp;</th>
+                                </tr>
+                            </thead>
+                    		<tbody>
+                            {% for e in events %}
+                                <tr class="cart__row border-bottom line1 cart-flex border-top">
+                                    <td class="cart__image-wrapper cart-flex-item">
+                                        <a href="#"><img class="cart__image" src="{{ e.Event_Image.url }}" alt="Elastic Waist Dress - Navy / Small"></a>
+                                    </td>
+                                    <td class="cart__meta small--text-left cart-flex-item">
+                                        <div class="list-view-item__title">
+                                            <a href="#">{{ e.Name }} </a>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price-wrapper cart-flex-item">
+                                        <span class="money">${{ e.Tickets_Price }}</span>
+                                    </td>
+                                    <td class="cart__update-wrapper cart-flex-item text-right">
+                                        <div class="cart__qty text-center">
+                                            <div class="qtyField">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <form action="{% url 'Quantity_Update' %}" method="post" id="minus">
+                                                            {% csrf_token %}
+                                                            <input hidden type="text" name='product' value='{{e.id}}'>
+                                                            <input hidden type="text" name='remove' value='True'>
+                                                            <a class="qtyBtn minus" onclick="document.getElementById('minus').submit();"><i class="icon icon-minus"></i></a>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input class="cart__qty-input qty" type="text" name="qty" id="qty" value="{{ e|cart_quantity:request.session.cart }}" pattern="[0-9]*">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <form action="{% url 'Quantity_Update' %}" method="post" id="plus">
+                                                            {% csrf_token %}
+                                                            <input hidden type="text" name='product' value='{{e.id}}'>
+                                                            <a class="qtyBtn plus" href="#" onclick="document.getElementById('plus').submit();"><i class="icon icon-plus"></i></a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right small--hide cart-price">
+                                        <div><span class="money">${{ e|price_total:request.session.cart }}</span></div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                    </table>
+               	</div>
+
+
+                <div class="container mt-4">
+                    <div class="row">
+                    	<div class="col-12 col-sm-12 col-md-4 col-lg-4 mb-4">
+                        	<h5>Discount Codes</h5>
+                            <form action="#" method="post">
+                            	<div class="form-group">
+                                    <label for="address_zip">Enter your coupon code if you have one.</label>
+                                    <input type="text" name="coupon">
+                                </div>
+                                <div class="actionRow">
+                                    <div><input type="button" class="btn btn-secondary btn--small" value="Apply Coupon"></div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 cart__footer">
+                            <div class="solid-border">
+                              <div class="row border-bottom pb-2">
+                                <span class="col-12 col-sm-6 cart__subtotal-title">Subtotal</span>
+                                <span class="col-12 col-sm-6 text-right"><span class="money">${{ events|total_cart_price:request.session.cart }}</span></span>
+                              </div>
+                              <div class="row border-bottom pb-2 pt-2">
+                                <span class="col-12 col-sm-6 cart__subtotal-title">Tax: HST/GST</span>
+                                <span class="col-12 col-sm-6 text-right">${{ events|delivery_charge:request.session.cart }}</span>
+                              </div>
+                              <div class="row border-bottom pb-2 pt-2">
+                                <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Grand Total</strong></span>
+                                <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">${{ events|total_bill:request.session.cart }}</span></span>
+                              </div>
+                              <a href="{% url 'Checkout' %}"><input type="submit" name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Proceed To Checkout"></a>
+                              <div class="paymnet-img"><img src="/static/images/payment-img.jpg" alt="Payment"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--End Body Content-->
+
+    {% include 'footer.html' %}
+    {% include 'jsinclude.html' %}
+</div>
+</body>
+
+<!-- belle/cart-variant1.html   11 Nov 2019 12:44:32 GMT -->
+</html>

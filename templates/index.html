@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/index.html   11 Nov 2019 12:16:10 GMT -->
+{% include 'head.html' %}
+<body class="template-index belle template-index-belle">
+<div id="pre-loader">
+    <img src="/static/images/loader.gif" alt="Loading..." />
+</div>
+<div class="pageWrapper">
+    {% include 'header.html' %}
+    <!--Body Content-->
+    <div id="page-content">
+    	<!--Home slider-->
+    	<div class="slideshow slideshow-wrapper pb-section sliderFull">
+        	<div class="home-slideshow">
+                {% for event in events %}
+            	<div class="slide">
+                	<div class="blur-up lazyload bg-size">
+                        <img class="blur-up lazyload bg-img"  src="{{ event.Event_Poster.url }}" alt="Shop Our New Collection" title="Shop Our New Collection" />
+                        <div class="slideshow__text-wrap slideshow__overlay classic bottom">
+                            <div class="slideshow__text-content bottom">
+                                <div class="wrap-caption center">
+                                        <h2 class="h1 mega-title slideshow__title">{{ event.Name }}</h2>
+                                        <span class="mega-subtitle slideshow__subtitle">{{ event.Place }}</span>
+{#                                        <span class="btn">Shop now</span>#}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+{#                <div class="slide">#}
+{#                	<div class="blur-up lazyload bg-size">#}
+{#                        <img class="blur-up lazyload bg-img" data-src="/static/images/slideshow-banners/belle-banner2.jpg" src="/static/images/slideshow-banners/belle-banner2.jpg" alt="Summer Bikini Collection" title="Summer Bikini Collection" />#}
+{#                        <div class="slideshow__text-wrap slideshow__overlay classic bottom">#}
+{#                            <div class="slideshow__text-content bottom">#}
+{#                                <div class="wrap-caption center">#}
+{#                                    <h2 class="h1 mega-title slideshow__title">Summer Bikini Collection</h2>#}
+{#                                    <span class="mega-subtitle slideshow__subtitle">Save up to 50% off this weekend only</span>#}
+{#                                    <span class="btn">Shop now</span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </div>
+        <!--End Home slider-->
+
+        <!--Featured Product-->
+        <div class="product-rows section">
+        	<div class="container">
+            	<div class="row">
+                	<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        				<div class="section-header text-center">
+                            <h2 class="h2">Live Events</h2>
+{#                            <p>Our most popular products based on sales</p>#}
+                        </div>
+            		</div>
+                </div>
+                <div class="grid-products">
+	                <div class="row">
+                        {% for event in events %}
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 item grid-view-item style2">
+                        	<div class="grid-view_image">
+
+                                <!-- start product image -->
+                                <div  class="grid-view-item__link">
+                                    <!-- image -->
+                                    <img class="grid-view-item__image primary blur-up lazyload" data-src="{{ event.Event_Image.url }}" src="{{ event.Event_Image.url }}" style="height: 551px; width: 393px" alt="image" title="product">
+                                    <!-- End image -->
+                                    <!-- Hover image -->
+                                    <img class="grid-view-item__image hover blur-up lazyload" data-src="{{ event.Event_Image.url }}" src="{{ event.Event_Image.url }}" style="height: 551px; width: 393px" alt="image" title="product">
+                                    <!-- End hover image -->
+                                </div>
+                                <!-- end product image -->
+                                <!--start product details -->
+                                <div class="product-details hoverDetails text-center mobile">
+                                    <!-- product name -->
+                                    <div class="product-name">
+                                        <a href="#">{{ event.Name }}</a>
+                                    </div>
+                                    <!-- End product name -->
+                                    <!-- product price -->
+                                    <div class="product-price">
+                                        <span class="price">${{ event.Tickets_Price }}</span>
+                                    </div>
+                                    <!-- End product price -->
+                                    
+                                    <!-- product button -->
+                                    <div class="button-set">
+                                        <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview{{ event.id }}">
+                                            <i class="icon anm anm-search-plus-r"></i>
+                                        </a>
+                                        <!-- Start product button -->
+{#                                        <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">#}
+{#                                            <button class="btn cartIcon btn-addto-cart" type="button" tabindex="0"><i class="icon anm anm-bag-l"></i></button>#}
+{#                                        </form>#}
+{#                                        <div class="wishlist-btn">#}
+{#                                            <a class="wishlist add-to-wishlist" href="wishlist.html">#}
+{#                                                <i class="icon anm anm-heart-l"></i>#}
+{#                                            </a>#}
+{#                                        </div>#}
+                                    </div>
+                                    <!-- end product button -->
+                                </div>
+                                <!-- End product details -->
+                            </div>
+                        </div>
+                            <!--Quick View popup-->
+                            <div class="modal fade quick-view-popup" id="content_quickview{{ event.id }}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div id="ProductSection-product-template" class="product-template__container prstyle1">
+                                        <div class="product-single">
+                                        <!-- Start model close -->
+                                        <a href="javascript:void(0)" data-dismiss="modal" class="model-close-btn pull-right" title="close"><span class="icon icon anm anm-times-l"></span></a>
+                                        <!-- End model close -->
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="product-details-img">
+                                                    <div class="pl-20">
+                                                        <img src="{{ event.Event_Image.url }}" style="height: 278px; width: 198px" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                    <div class="product-single__meta">
+                                                        <h2 class="product-single__title">Event Details</h2>
+                                                        <div class="prInfoRow">
+                                                            <div class="product-stock"> <span class="instock ">Available Tickets {{ event.Total_Ticket }}</span> <span class="outstock hide">available</span> </div>
+                                                            <div class="product-sku">DATE: <span class="variant-sku">{{ event.Event_Date }}</span></div>
+                                                        </div>
+                                                        <p class="product-single__price product-single__price-product-template">
+                                                            <span class="visually-hidden">Regular price</span>
+                                                            <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
+                                                                <span id="ProductPrice-product-template"><span class="money">${{ event.Tickets_Price }}</span></span>
+                                                            </span>
+                                                        </p>
+                                                        <div class="product-single__description rte">
+                                                            {{ event.Description }}
+                                                        </div>
+
+                                                    <form method="post" action="{% url 'Add_to_Cart' %}" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                        <!-- Product Action -->
+                                                        <div class="product-action clearfix">
+                                                            <div class="product-form__item--quantity">
+                                                                <div class="wrapQtyBtn">
+                                                                    <div class="qtyField">
+{#                                                                        <a class="qtyBtn minus" href="javascript:void(0);"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>#}
+{#                                                                        <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">#}
+{#                                                                        <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>#}
+                                                                        <input hidden type="text" name="id" value="{{ event.id }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="product-form__item--submit">
+                                                                <button type="submit" name="add" class="btn product-form__cart-submit">
+                                                                    <span>Add to cart</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Product Action -->
+                                                    </form>
+                                                </div>
+                                        </div>
+                                    </div>
+                                        <!--End-product-single-->
+                                        </div>
+                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Quick View popup-->
+                        {% endfor %}
+                	</div>
+                </div>
+           </div>
+        </div>	
+        <!--End Featured Product-->
+    </div>
+    <!--End Body Content-->
+    
+    {% include 'footer.html' %}
+    {% include 'jsinclude.html' %}
+</div>
+</body>
+</html>
